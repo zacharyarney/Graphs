@@ -48,16 +48,29 @@ class Graph:
         visited = set()
         output = []
         while len(queue) > 0:
-            for v in self.vertices[queue[0]]:
-                if v not in queue and v not in visited:
-                    queue.append(v)
             popped = queue.pop(0)
             visited.add(popped)
             output.append(popped)
+            for v in self.vertices[popped]:
+                if v not in queue and v not in visited:
+                    queue.append(v)
+        print(f'PATH: {output}')
+
+    def dft(self, start):
+        stack = [start]
+        visited = set()
+        output = []
+        while len(stack) > 0:
+            popped = stack.pop()
+            visited.add(popped)
+            output.append(popped)
+            for v in self.vertices[popped]:
+                if v not in stack and v not in visited:
+                    stack.append(v)
         print(f'PATH: {output}')
 
 
 # [ ]
 # {1, 5, 2, 4, 3, 6 }
 g = Graph()
-g.bft('1')
+g.dft('1')
