@@ -1,8 +1,10 @@
+import random
 
 
 class User:
     def __init__(self, name):
         self.name = name
+
 
 class SocialGraph:
     def __init__(self):
@@ -47,8 +49,25 @@ class SocialGraph:
         # !!!! IMPLEMENT ME
 
         # Add users
+        for i in range(numUsers):
+            self.addUser(f'Friend {i + 1}')
 
         # Create friendships
+        possibleFriendships = []
+        for userID in self.users:
+            # for every userID, we loop through every other ID
+            # from the direct next to the end
+            # this way we end up with a pair for every following ID
+            # and no duplicates of pairs with preceding IDs
+            for friendID in range(userID + 1, self.lastID + 1):
+                possibleFriendships.append((userID, friendID))
+        print(possibleFriendships)
+        random.shuffle(possibleFriendships)
+        print(possibleFriendships)
+        for friendship in possibleFriendships[: (
+                numUsers * avgFriendships) // 2]:
+            print(f'CREATING FRIENDSHIP: {friendship}')
+            self.addFriendship(friendship[0], friendship[1])
 
     def getAllSocialPaths(self, userID):
         """
@@ -61,6 +80,17 @@ class SocialGraph:
         """
         visited = {}  # Note that this is a dictionary, not a set
         # !!!! IMPLEMENT ME
+        q = []
+        q.append(userID)
+        while len(q) > 0:
+            path = q.pop(0)
+            newID = path[-1]
+            if newID not in visited:
+                visted[newID] = path
+                for friendID in self.friendships[newID]:
+                    new_path = list(path)
+                    new_path.append(friendID)
+                    q.append(new_path)
         return visited
 
 
