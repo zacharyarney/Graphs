@@ -63,6 +63,24 @@ def dft(prev_room_id=None):
         return
 
 
+def bfs(start):
+    q = [start]
+    visited = set()
+    print(f'START: {start}')
+    while len(q) > 0:
+        path = []
+        path.append(q.pop(0))
+        cur = path[-1]
+        if cur not in visited:
+            visited.add(cur)
+            if '?' in graph[cur].values():
+                return path
+            for direction in graph[cur].values():
+                new_path = list(path)
+                new_path.append(direction)
+                q.append(new_path)
+
+
 dft()
 print(f'GRAPH: {graph}')
 print(f'PATH: {traversalPath}')
