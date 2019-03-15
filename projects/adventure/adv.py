@@ -1,7 +1,7 @@
-from room import Room
+# from room import Room
 from player import Player
 from world import World
-from room_graph import roomGraph
+from rooms_graph import roomGraph
 
 import random
 
