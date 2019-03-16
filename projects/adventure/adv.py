@@ -23,7 +23,6 @@ def dft(current, prev_room_id=None):
     if len(graph) < len(roomGraph):
         # set current room
         cur_room_id = current
-        # print(f'GRAPH2: {graph}')
         # room_exits returns an array of directions
         # i.e. ['n', 's', 'e', 'w']
         room_exits = None
@@ -62,7 +61,6 @@ def dft(current, prev_room_id=None):
             backtrack = bfs(cur_room_id)
             if backtrack:
                 cur = backtrack[0]
-                # back_dirs = []
                 while len(backtrack) > 1:
                     for direction in graph[backtrack[0]]:
                         if graph[backtrack[0]][direction] == backtrack[1]:
@@ -73,7 +71,6 @@ def dft(current, prev_room_id=None):
                             cur = backtrack.pop(0)
                             break
 
-                # print(f'GRAPH3: {graph}')
                 dft(player.currentRoom.id, cur)
 
 
@@ -81,9 +78,7 @@ def bfs(start):
     q = [[start]]
     visited = set()
     while len(q) > 0:
-        # path = []
         path = q.pop(0)
-        # print(f'BACK PATH: {path}')
         cur = path[-1]
         if cur not in visited:
             visited.add(cur)
