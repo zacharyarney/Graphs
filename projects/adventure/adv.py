@@ -71,6 +71,7 @@ def dft(current, prev_room_id=None):
                             traversalPath.append(direction)
                             player.travel(direction)
                             cur = backtrack.pop(0)
+                            break
 
                 # print(f'GRAPH3: {graph}')
                 dft(player.currentRoom.id, cur)
@@ -95,7 +96,6 @@ def bfs(start):
 
 
 dft(player.currentRoom.id)
-# print(f'GRAPH: {graph}')
 print(f'PATH: {traversalPath}')
 
 
